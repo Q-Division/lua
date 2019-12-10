@@ -62,3 +62,19 @@ else()
 endif()
 
 set_target_properties(Lua PROPERTIES OUTPUT_NAME "lua53$<$<CONFIG:Debug>:d>")
+
+#Install
+set(public_include
+	"${CMAKE_CURRENT_LIST_DIR}/lua.h"
+	"${CMAKE_CURRENT_LIST_DIR}/luaconf.h"
+	"${CMAKE_CURRENT_LIST_DIR}/lualib.h"
+	"${CMAKE_CURRENT_LIST_DIR}/lauxlib.h"
+	"${CMAKE_CURRENT_LIST_DIR}/lua.hpp" 
+)
+
+set_target_properties(Lua PROPERTIES PUBLIC_HEADER "${public_include}")
+
+install(TARGETS Lua
+		RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+		ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+		PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
